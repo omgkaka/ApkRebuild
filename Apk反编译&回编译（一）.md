@@ -32,7 +32,8 @@ b. 注入自己的逻辑代码回编译： 这里以嵌入有米广告积分墙S
 在正常的项目开发中嵌入此SDK需要配置这些信息--> 1.在AndroidManifest.xml 清单文件中配置有米积分墙SDK所需的权限，组件声明等信息； 2.在项目中引入有米SDK所需的jar包；  3.在代码中添加打开有米积分墙的逻辑代码  
 现在换成回编译又怎么处理呢？  下面来分析思路： 1. 配置清单这一步骤和简单回编译一样的，直接在清单文件中添加权限，组件声明代码即可  2. 引入jar包， 回编译的时候怎么引入jar包呢， 查看反编译后的smali文件夹就会发现，项目依赖的所有jar包都被反编译到smali文件夹下面了，这样一来，我们只需自己撸个简单的集成了有米SDK的项目生成release版本的test.apk文件，反编译即可在smali文件夹下获得有米sdk的smali文件，放在了 smali/net/youmi/android这个文件夹下，如图： 
 ![](http://i1.piimg.com/567571/7c1e1ea9eb6987ee.png) 
-复制net文件夹到demo/smali 文件夹下即可![](http://i1.piimg.com/567571/2def79ce0c0a1664.png) 
+复制net文件夹到demo/smali 文件夹下即可  
+![](http://i1.piimg.com/567571/2def79ce0c0a1664.png) 
 3.在代码中添加打开有米积分墙的逻辑代码， 回编译是把smali文件转为dex文件， 嵌入的逻辑代码又是java代码，这时候只需要上一步的test.apk生成的smali文件中的逻辑代码复制到demo/smali文件夹下对应的smali文件中。
 下面是打开有米积分墙的smali代码，写成了一个方法，![](http://i1.piimg.com/567571/cf41e4d5d0970690.png)
 调用的时候  invoke-virtual {p0}, Lcom/jeffer/ym/MainActivity;->showYM()V，其中的com/jeffer/ym/MainActivity换成你需要注入代码所在的Activity的全类名。 最后在Terminal定位到D:\ApkTool>  输入 apktool b demo  回车， 稍等几秒即会在demo文件夹下生成dist和build文件夹（不用管build文件夹），dist里面就是回编译生成的apk文件，重新签名后安装，打开APP即可在你注入代码处打开有米积分墙。
