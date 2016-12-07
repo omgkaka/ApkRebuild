@@ -34,8 +34,8 @@ b. 注入自己的逻辑代码回编译： 这里以嵌入有米广告积分墙S
 ![](http://i1.piimg.com/567571/7c1e1ea9eb6987ee.png) 
 复制net文件夹到demo/smali 文件夹下即可![](http://i1.piimg.com/567571/2def79ce0c0a1664.png) 
 3.在代码中添加打开有米积分墙的逻辑代码， 回编译是把smali文件转为dex文件， 嵌入的逻辑代码又是java代码，这时候只需要上一步的test.apk生成的smali文件中的逻辑代码复制到demo/smali文件夹下对应的smali文件中。
-下面是打开有米积分墙的smali代码，写成了一个方法，![](http://i1.piimg.com/567571/e8748b195759759f.png)
-调用的时候  invoke-virtual {p0}, Lcom/demo/MainActivity;->showYM()V，其中的com/demo/MainActivity换成你需要注入代码所在的Activity的全类名。 最后在Terminal定位到D:\ApkTool>  输入 apktool b demo  回车， 稍等几秒即会在demo文件夹下生成dist和build文件夹（不用管build文件夹），dist里面就是回编译生成的apk文件，重新签名后安装，打开APP即可在你注入代码处打开有米积分墙。
+下面是打开有米积分墙的smali代码，写成了一个方法，![](http://i1.piimg.com/567571/cf41e4d5d0970690.png)
+调用的时候  invoke-virtual {p0}, Lcom/jeffer/ym/MainActivity;->showYM()V，其中的com/jeffer/ym/MainActivity换成你需要注入代码所在的Activity的全类名。 最后在Terminal定位到D:\ApkTool>  输入 apktool b demo  回车， 稍等几秒即会在demo文件夹下生成dist和build文件夹（不用管build文件夹），dist里面就是回编译生成的apk文件，重新签名后安装，打开APP即可在你注入代码处打开有米积分墙。
 
 c. 注入逻辑代码和控件回编译： 下回分解 
  
